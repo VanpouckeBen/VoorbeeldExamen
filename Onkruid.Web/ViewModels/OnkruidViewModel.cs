@@ -16,6 +16,7 @@ namespace Onkruid.Web.ViewModels
 
         public string SelectedFamilie { get; set; }
 
+        public List<Onkruid_Naam> Onkruid_Namen { get; set; }
 
     }
 }

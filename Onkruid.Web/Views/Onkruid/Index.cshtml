@@ -6,8 +6,16 @@
 
 <h1>Onkruid families</h1>
 
-<select asp-for="SelectedFamilie"
-        asp-items="@Model.Families">
-    <option>*** Kies een familie ***</option>
-</select>
+<form asp-action="Index">
+    <div class="form-group">
+        <select asp-for="SelectedFamilie"
+                asp-items="@Model.Families">
+            <option>*** Kies een familie ***</option>
+        </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Zoek Onkruid!" class="btn btn-success" />
+        </div>
+
+</form>
 

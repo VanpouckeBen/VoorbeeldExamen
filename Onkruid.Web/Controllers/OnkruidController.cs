@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Onkruid.Core.Models;
 using Onkruid.Core.Repositories;
 using Onkruid.Web.ViewModels;
 
@@ -37,79 +38,96 @@ namespace Onkruid.Web.Controllers
             return View(onkruidVM);
         }
 
-        // GET: Onkruid/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Onkruid/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Onkruid/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Index(OnkruidViewModel onkruidVM)
         {
-            try
+            //1. families ophalen
+            IEnumerable<Familie> families = await _repo.GetFamiliesAsync();
+            IEnumerable<Onkruid_Naam> onkruid_Namen = await _repo.GetOnkruidNamenAsync(onkruidVM.SelectedFamilie);
+            //2. vul view model
+            onkruidVM = new OnkruidViewModel()
             {
-                // TODO: Add insert logic here
+                Families = new SelectList(families, "Familie_Naam", "Familie_Naam",onkruidVM.SelectedFamilie),
+                Onkruid_Namen = onkruid_Namen.ToList()
+            };
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            return View(onkruidVM);
         }
 
-        // GET: Onkruid/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// GET: Onkruid/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Onkruid/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// GET: Onkruid/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: Onkruid/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
 
-        // GET: Onkruid/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        // POST: Onkruid/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// GET: Onkruid/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: Onkruid/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //// GET: Onkruid/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: Onkruid/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
