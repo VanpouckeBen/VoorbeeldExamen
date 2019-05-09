@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Onkruid.Core.Repositories;
+using Onkruid.Web.ViewModels;
 
 namespace Onkruid.Web.Controllers
 {
@@ -22,11 +24,17 @@ namespace Onkruid.Web.Controllers
         // GET: Onkruid
         public async Task<IActionResult> Index()
         {
+            //1. families ophalen
             var families = await _repo.GetFamiliesAsync();
+            
+            //2. vul view model
+            OnkruidViewModel onkruidVM = new OnkruidViewModel()
+            {
+                Families = new SelectList(families, "Familie_Naam", "Familie_Naam")
+            };
 
 
-
-            return View(families);
+            return View(onkruidVM);
         }
 
         // GET: Onkruid/Details/5
