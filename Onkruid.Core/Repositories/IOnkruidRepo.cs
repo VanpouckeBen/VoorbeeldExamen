@@ -8,5 +8,6 @@ namespace Onkruid.Core.Repositories
     {
         Task<IEnumerable<Familie>> GetFamiliesAsync();
         Task<IEnumerable<Onkruid_Naam>> GetOnkruidNamenAsync(string onkruidFamilie);
+        Task<Onkruid_Naam> GetOnkruidNaamAsync(string wetenschappelijkeNaam);
     }
 }

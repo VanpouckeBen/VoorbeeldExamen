@@ -34,5 +34,14 @@ namespace Onkruid.Core.Repositories
                 .Where( o => o.Familie_Naam == OnkruidFamilie)
                 .ToListAsync();
         }
+
+        public async Task<Onkruid_Naam> GetOnkruidNaamAsync(string wetenschappelijkeNaam)
+        {
+            //neem de laatste die toegevoegd is als er meerdere zijn.
+            return await _context
+                .Onkruid_Naam
+                .Include(o => o.Gebruik)
+                .LastOrDefaultAsync(o => o.Wetenschappelijke_Naam == wetenschappelijkeNaam);
+        }
     }
 }

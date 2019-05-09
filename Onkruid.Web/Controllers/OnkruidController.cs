@@ -57,11 +57,15 @@ namespace Onkruid.Web.Controllers
             return View(onkruidVM);
         }
 
-        //// GET: Onkruid/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
+        // GET: Onkruid/Details/5
+        public async Task<IActionResult> Details(string wetenschappelijkeNaam)
+        {
+            //1. details opvragen bij familie
+            Onkruid_Naam Onkruid_Naam = await _repo.GetOnkruidNaamAsync(wetenschappelijkeNaam);
+
+            //2. toon details
+            return View(Onkruid_Naam);
+        }
 
         //// GET: Onkruid/Create
         //public ActionResult Create()

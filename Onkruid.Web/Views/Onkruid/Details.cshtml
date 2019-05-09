@@ -1,0 +1,24 @@
+﻿@model Onkruid.Core.Models.Onkruid_Naam
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<h3>@Model.Nederlandse_Naam</h3>
+<hr />
+<table>
+    <tr>
+        <th>Wetenschappelijke Naam</th>
+        <td>@Model.Wetenschappelijke_Naam</td>
+    </tr>
+    <tr>
+        <th>Nuttig gebruik</th>
+        <td>@Model.Gebruik.Gebruik_Beschrijving</td>
+    </tr>
+</table>
+
+<a class="" asp-area="" asp-controller="Onrkuid" asp-action="Index">Terug naar familie overzicht</a>
+
+
+
