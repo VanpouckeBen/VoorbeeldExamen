@@ -4,6 +4,13 @@
 }
 
 <h1>Details</h1>
+@if(!@User.Identity.IsAuthenticated)
+{
+<div>Je bent niet ingelogd. Inloggen is noodzakelijk voor meer detail.</div>
+}
+else{
+
+<div> je bent ingelogd als @User.Identity.Name</div>
 
 <h3>@Model.Nederlandse_Naam</h3>
 <hr />
@@ -17,8 +24,8 @@
         <td>@Model.Gebruik.Gebruik_Beschrijving</td>
     </tr>
 </table>
-
-<a class="" asp-area="" asp-controller="Onrkuid" asp-action="Index">Terug naar familie overzicht</a>
+}
+<a class="" asp-area="" asp-controller="Onkruid" asp-action="Index">Terug naar familie overzicht</a>
 
 
 
