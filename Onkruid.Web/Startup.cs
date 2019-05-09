@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Onkruid.Core.Data;
+using Onkruid.Core.Repositories;
 
 namespace Onkruid.Web
 {
@@ -28,6 +29,10 @@ namespace Onkruid.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //dependency injection
+            services.AddScoped<IOnkruidRepo, OnkruidRepo>();
+
+            //cookie policy voor security (inloggen)
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -35,6 +40,7 @@ namespace Onkruid.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //db context injecteren op basis van default connections
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

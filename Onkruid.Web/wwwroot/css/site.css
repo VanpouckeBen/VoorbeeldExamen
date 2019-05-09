@@ -54,3 +54,13 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.onkruid-title{
+    color: yellow !important;
+    
+}
+
+.menu {
+    background-color: black !important;
+    color: white !important;
+}
