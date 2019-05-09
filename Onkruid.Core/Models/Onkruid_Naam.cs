@@ -8,7 +8,7 @@ namespace Onkruid.Core.Models
     public class Onkruid_Naam
     {
         [Column("Wetenschappelijke Naam")]
-        public string Wetenschappelijke_Naams { get; set; }
+        public string Wetenschappelijke_Naam { get; set; }
 
         [Column("Nederlandse Naam")]
         public string Nederlandse_Naam { get; set; }
@@ -22,5 +22,8 @@ namespace Onkruid.Core.Models
         public Familie Familie { get; set; }
         public Gebruik Gebruik { get; set; }
 
+        //calculated property
+        [NotMapped]
+        public string Image => $"Images/{Wetenschappelijke_Naam}jpg";
     }
 }

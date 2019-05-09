@@ -27,11 +27,12 @@ namespace Onkruid.Web.Controllers
         {
             //1. families ophalen
             var families = await _repo.GetFamiliesAsync();
-            
+
             //2. vul view model
             OnkruidViewModel onkruidVM = new OnkruidViewModel()
             {
-                Families = new SelectList(families, "Familie_Naam", "Familie_Naam")
+                Families = new SelectList(families, "Familie_Naam", "Familie_Naam"),
+               
             };
 
 
@@ -44,6 +45,7 @@ namespace Onkruid.Web.Controllers
             //1. families ophalen
             IEnumerable<Familie> families = await _repo.GetFamiliesAsync();
             IEnumerable<Onkruid_Naam> onkruid_Namen = await _repo.GetOnkruidNamenAsync(onkruidVM.SelectedFamilie);
+
             //2. vul view model
             onkruidVM = new OnkruidViewModel()
             {
@@ -51,7 +53,7 @@ namespace Onkruid.Web.Controllers
                 Onkruid_Namen = onkruid_Namen.ToList()
             };
 
-
+            //3. toon view
             return View(onkruidVM);
         }
 

@@ -12,10 +12,25 @@
                 asp-items="@Model.Families">
             <option>*** Kies een familie ***</option>
         </select>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Zoek Onkruid!" class="btn btn-success" />
-        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Zoek Onkruid!" class="btn btn-success" />
+    </div>
 
 </form>
+
+@if (Model.Onkruid_Namen != null)
+{
+    @foreach (var onkruid in Model.Onkruid_Namen)
+    {
+        <div>@onkruid.Nederlandse_Naam</div>
+
+        //zonder calculated property
+        <img src="~/Images/@(onkruid.Wetenschappelijke_Naam)jpg" title="@onkruid.Wetenschappelijke_Naam" alt="" />
+        //met calculated property
+        //<img src="~/@onkruid.Image" title="@onkruid.Wetenschappelijke_Naam" alt=""/>
+
+        <a class="" asp-area="" asp-controller="Onrkuid" asp-action="Details">Meer info...</a>
+    }
+}
 
