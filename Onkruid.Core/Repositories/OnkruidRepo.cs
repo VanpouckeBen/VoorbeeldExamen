@@ -28,11 +28,23 @@ namespace Onkruid.Core.Repositories
         }
         public async Task<IEnumerable<Onkruid_Naam>> GetOnkruidNamenAsync(string OnkruidFamilie)
         {
-            //haal onkruid families op
-            return await _context
-                .Onkruid_Naam
-                .Where( o => o.Familie_Naam == OnkruidFamilie)
-                .ToListAsync();
+            //haal onkruid families 
+            // --> gebruik van AsNoTracking voor caching probleem op te lossen. 
+            // --> (aantal rijen data zijn correct, maar data is verkeerd opgevuld)
+            var result = _context
+                 .Onkruid_Naam
+                 .Where(o => o.Familie_Naam == OnkruidFamilie)
+                 .AsNoTracking();
+                 ;
+               
+
+            return await result.ToListAsync();
+        }
+        //testje
+        public IEnumerable<Onkruid_Naam> GetOnkruidNamen(string OnkruidFamilie)
+        {
+            return _context
+                 .Onkruid_Naam.AsNoTracking();
         }
 
         public async Task<Onkruid_Naam> GetOnkruidNaamAsync(string wetenschappelijkeNaam)
